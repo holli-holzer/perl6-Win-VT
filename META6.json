@@ -1,0 +1,16 @@
+{
+  "name": "Win::VT",
+  "description": "Write me!",
+  "version": "0.1",
+  "perl": "6.*",
+  "auth": "holli",
+  "depends": [],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Win::VT": "lib/Win/VT.pm6"
+  },
+  "resources": [],
+  "license": "Write me!",
+  "source-url": "Write me!"
+}
