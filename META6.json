@@ -1,21 +1,24 @@
 {
-  "name": "Win::VT",
-  "description": "Virtual terminal support for Windows",
-  "version": "0.000001",
-  "perl": "6.*",
-  "authors": [
+  "auth" : "github:holli-holzer",
+  "authors" : [
     "Markus 'holli' Holzer",
     ""
   ],
-  "auth": "github:holli-holzer",
-  "depends": [],
-  "build-depends": [],
-  "test-depends": [],
-  "provides": {
-    "Win::VT": "lib/Win/VT.pm6",
-    "Win::VT::Auto": "lib/Win/VT/Auto.pm6"
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "Virtual terminal support for Windows",
+  "license" : "GPL-3.0",
+  "name" : "Win::VT",
+  "perl" : "6.*",
+  "provides" : {
+    "Win::VT" : "lib/Win/VT.pm6",
+    "Win::VT::Auto" : "lib/Win/VT/Auto.pm6",
+    "Win::VT::Auto::I" : "lib/Win/VT/Auto/I.pm6",
+    "Win::VT::Auto::O" : "lib/Win/VT/Auto/O.pm6"
   },
-  "resources": [],
-  "license": "GPL-3.0",
-  "source-url": "https://github.com/holli-holzer/perl6-Win-VT"
+  "resources" : [ ],
+  "source-url" : "https://github.com/holli-holzer/perl6-Win-VT",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.000001"
 }

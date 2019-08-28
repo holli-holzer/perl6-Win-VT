@@ -47,6 +47,12 @@ Using `Win::VT::Auto` the "clear screen" example from above can written as:
 
     ~$ perl6 -MWin::VT::Auto -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
 
+Or even
+
+    ~$ perl6 -MWin::VT::Auto::O -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
+
+The "O" in `Win::VT::Auto::O` stands for Output (only) obviously. Analogous there is `Win::VT::Auto::I`.
+
 AUTHOR
 ======
 
