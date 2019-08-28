@@ -12,18 +12,30 @@ constant DWORD  := uint32;
 constant BOOL   := int32;
 constant HANDLE := Pointer[void];
 
-sub GetConsoleMode(HANDLE, DWORD is rw) is native('Kernel32')  returns BOOL { * };
-sub SetConsoleMode(HANDLE, DWORD) is native('Kernel32')  returns BOOL { * };
-sub GetStdHandle(DWORD) is native('Kernel32')  returns Pointer[void]  { * };
+sub GetConsoleMode(HANDLE, DWORD is rw) is native('Kernel32') returns BOOL { * };
+sub SetConsoleMode(HANDLE, DWORD) is native('Kernel32') returns BOOL { * };
+sub GetStdHandle(DWORD) is native('Kernel32') returns HANDLE { * };
 
-my HANDLE $input-handle  = GetStdHandle( STD_INPUT_HANDLE );
-my HANDLE $output-handle = GetStdHandle( STD_OUTPUT_HANDLE );
+my HANDLE $input-handle;
+my HANDLE $output-handle;
 my DWORD $output-mode;
 my DWORD $input-mode;
 
-sub vt-on(Bool :$vt-input=True, Bool :$vt-output=True ) returns Bool is export(:MANDATORY) {
-	GetConsoleMode($input-handle,  $input-mode);
-	GetConsoleMode($output-handle, $output-mode);
+INIT {
+	if $*VM.osname eq "mswin32"
+	{
+		$input-handle  = GetStdHandle( STD_INPUT_HANDLE );
+		$output-handle = GetStdHandle( STD_OUTPUT_HANDLE );
+	}
+}
+
+sub vt-on(Bool :$vt-input=True, Bool :$vt-output=True ) returns Bool is export(:MANDATORY)
+{
+	return False
+		unless $input-handle.defined && $output-handle.defined;
+
+	return False
+	    unless GetConsoleMode($input-handle,  $input-mode) && GetConsoleMode($output-handle, $output-mode);
 
 	my $new-input-mode  = $input-mode  +| ENABLE_PROCESSED_INPUT  +| ENABLE_VIRTUAL_TERMINAL_INPUT;
 	my $new-output-mode = $output-mode +| ENABLE_PROCESSED_OUTPUT +| ENABLE_VIRTUAL_TERMINAL_PROCESSING;
@@ -35,8 +47,8 @@ sub vt-on(Bool :$vt-input=True, Bool :$vt-output=True ) returns Bool is export(:
 }
 
 sub vt-off() returns Bool is export(:MANDATORY) {
-
 	return (
+		$input-handle.defined && $output-handle.defined &&
 		SetConsoleMode($output-handle, $output-mode) &&
 		SetConsoleMode($input-handle, $input-mode)
 	).Bool;
