@@ -41,15 +41,15 @@ You should make sure to always disable the input emulation cleanly when your pro
 The main module provides the `vt-on` and `vt-off` functions that lets you control things manually.
 
 `Win::VT::Auto` provides additional sugar. It will automatically enable VT at `INIT` time and disable at `END` time.
-It also catches `SIGINT` for you and disables VT in case of a crash or user interruption.
+It also catches `SIGINT` for you and so disables VT in case of a crash or user interruption.
 
 Using `Win::VT::Auto` the "clear screen" example from above can written as:
 
-    ~$ perl6 -MWin::VT::Auto -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
+    c:\> perl6 -MWin::VT::Auto -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
 
 Or even
 
-    ~$ perl6 -MWin::VT::Auto::O -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
+    c:\> perl6 -MWin::VT::Auto::O -e "say chr(27) ~ '[2J' ~ chr(27) ~ '[;H';"
 
 The "O" in `Win::VT::Auto::O` stands for Output (only) obviously. Analogous there is `Win::VT::Auto::I`.
 
