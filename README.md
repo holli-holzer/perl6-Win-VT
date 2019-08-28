@@ -26,10 +26,6 @@ SYNOPSIS
 	# disable escape sequences again
 	vt-off;
 
-	# Or short
-	use Win::VT :cls;
-    cls;
-
 DESCRIPTION
 ===========
 
